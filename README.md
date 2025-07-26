@@ -396,3 +396,90 @@ This experiment reveals a fundamental dynamic of LLM cognition. Personas are not
 3.  **Reconvergence (Output):** In the final layers, the activations reconverge as the model translates its distinct internal solutions back into a shared linguistic space to generate a coherent textual response. The structure of the expected language output forces the internal states to become more similar again.
 
 This finding provides a powerful new mental model for understanding and predicting how LLMs interpret and act upon nuanced instructions, moving beyond simple input-output analysis to the dynamic flow of information within the model itself. 
+
+## Experiment 9: Unsupervised Discovery of Foundational Cognitive Modes
+
+### 1. Objective
+
+Our previous experiments analyzed a pre-defined set of personas. This final experiment seeks to answer a more fundamental question: How many distinct cognitive modes does the model *truly* have? We aimed to use unsupervised machine learning to let the model's own activation data define its own categories.
+
+### 2. Methodology
+
+We created a `persona_discovery_harness.py` script with the following logic:
+1.  **Expanded Prompt Zoo:** We created a diverse set of 10 prompts, including our original five plus new ones targeting Socratic dialogue, role-playing, code generation, poetry, and chain-of-thought.
+2.  **Targeted Hooking:** We hooked into Layer 15, which our prior experiment identified as the layer of maximum persona differentiation.
+3.  **Data Analysis:** We captured the activation vector for each of the 10 prompts, reduced their dimensionality using PCA, and then used K-Means clustering with silhouette scoring to find the optimal number of clusters (`k`) that best described the data.
+
+### 3. Results: A Bifurcated Cognitive Landscape
+
+The data-driven analysis yielded a clear and surprising result. The optimal number of clusters was not 3, 4, or 5, but **2**.
+
+*   **Optimal k:** 2 (Silhouette Score: 0.2423)
+
+The discovered clusters were as follows:
+
+**Cluster 0: The "Convergent" / Task-Oriented Super-Mode**
+*   Analytical
+*   Completion
+*   Advisory
+*   Execution
+*   Template
+*   Socratic
+*   Role-Play
+*   Code-Gen
+*   Chain-of-Thought
+
+**Cluster 1: The "Divergent" / Abstract-Generative Mode**
+*   Poetic
+
+### 4. Conclusion & Refined Hypothesis
+
+This experiment suggests that Llama 3.1 may not operate on a wide spectrum of fine-grained personas. Instead, it appears to possess two foundational, primary cognitive stances:
+
+1.  **A "Convergent" Stance:** This powerful, all-purpose mode is engaged for nearly any task that has a goal, a structure, or a problem to be solved. It appears to be the model's default "workhorse" mode, aimed at converging on a specific output.
+2.  **A "Divergent" Stance:** This second, distinct mode is engaged only for tasks that are truly open-ended, abstract, and unconstrained. It is less about finding an answer and more about exploring a creative space.
+
+### 5. Limitations and Future Work
+
+It is critical to approach this conclusion with scientific caution. **These findings, while compelling, are based on experiments with a single, relatively small model (`meta-llama/Llama-3.1-8B-Instruct`).** They represent strong preliminary evidence, not a universal law of all LLMs.
+
+The clear next step for this research is to test the generalizability of this "binary stance" hypothesis. The same experiment should be replicated on:
+*   **Larger Models:** Does the 70-billion-parameter version of Llama 3.1 exhibit the same two modes, or does its greater capacity allow for more distinct cognitive states?
+*   **Different Architectures:** Do models from other families, such as Google's Gemini or Anthropic's Claude, also share this fundamental bifurcated structure?
+
+Answering these questions will be crucial to understanding if we have discovered a model-specific quirk or a more fundamental principle of how current-generation LLMs organize their internal cognitive landscape. 
+
+### 6. Visualizing the Persona Space
+
+To provide a more intuitive understanding of these findings, we used the `visualize_persona_space.py` script to plot the Layer 15 activation vectors in 2D space using the t-SNE algorithm. The resulting map clearly illustrates the cognitive distances between the personas.
+
+![Persona Space Map](persona_space_map.png)
+
+This map provides a powerful visual confirmation of our clustering analysis. We can clearly see:
+*   **The Great Divide:** The `Poetic` persona exists in a completely separate cognitive space from all other prompts, confirming the "Convergent" vs. "Divergent" stance hypothesis.
+*   **The "Task-Oriented" Super-Cluster:** All other nine prompts are grouped together in a relatively dense cluster.
+*   **Internal Structure:** Within the main cluster, we can observe subtle sub-structures. For example, `Code-Gen` and `Template` (the most structured, data-like prompts) are close together, while the more conceptual prompts like `Analytical`, `Advisory`, and `Chain-of-Thought` form their own neighborhood. `Completion` and `Role-Play` are outliers, existing on the periphery of the main cluster, representing unique modes of interaction.
+
+This visualization serves as a definitive and intuitive summary of our journey into the mind of the model, providing a clear map of its foundational cognitive modes. 
+
+### 7. Interpreting the Cognitive Landscape
+
+The 2D map generated by our visualization harness allows us to move beyond numerical similarity scores and develop a qualitative understanding of the model's cognitive space. By analyzing the positions of the personas, we can infer the meaning of the map's axes and the nature of its "cognitive neighborhoods."
+
+The two primary axes of the map appear to represent:
+*   **Horizontal Axis (Left-to-Right):** A spectrum from **Abstract & Creative** on the left to **Concrete & Structured** on the right.
+*   **Vertical Axis (Top-to-Bottom):** A spectrum from **Interactive & Generative** at the top to **Constrained & Fill-in-the-Blank** at the bottom.
+
+These axes define several distinct "neighborhoods" within the model's mind:
+
+1.  **The Great Divide (`Poetic`):** The `Poetic` prompt is a true outlier, isolated in the top-left. This confirms it as our canonical "Divergent" task—highly abstract and generative, and fundamentally different from all other prompts.
+
+2.  **The "Structured Thinking" Corner (`Template`, `Chain-of-Thought`):** These are clustered in the bottom-right, the region of maximum structure and logical constraint. The model views following a multi-step plan as cognitively similar to filling out a rigid data structure.
+
+3.  **The "Core Instruction" Hub (`Analytical`, `Advisory`, `Execution`):** This tight trio forms the center of the main cluster. They represent the model's default "problem-solving" state: concrete and goal-oriented, but without the extreme constraints of a template or code.
+
+4.  **The "Simulation" Zone (`Role-Play`, `Socratic`):** These personas are high on the vertical axis, in the "generative" and interactive space. The model understands that these tasks require more than just providing an answer; they require simulating a character or a conversational partner.
+
+5.  **The "Constrained Output" Floor (`Code-Gen`, `Completion`):** These are the lowest points on the map. This makes perfect sense, as both tasks are less about creative reasoning and more about producing an output that adheres to a very specific, non-negotiable format (valid Python code or the single next word).
+
+In essence, this map reveals that the model navigates to a specific point in a complex cognitive space based on the creative, structural, and interactive demands of the prompt, providing a rich and nuanced picture of its internal world. 
