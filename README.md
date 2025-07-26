@@ -483,3 +483,67 @@ These axes define several distinct "neighborhoods" within the model's mind:
 5.  **The "Constrained Output" Floor (`Code-Gen`, `Completion`):** These are the lowest points on the map. This makes perfect sense, as both tasks are less about creative reasoning and more about producing an output that adheres to a very specific, non-negotiable format (valid Python code or the single next word).
 
 In essence, this map reveals that the model navigates to a specific point in a complex cognitive space based on the creative, structural, and interactive demands of the prompt, providing a rich and nuanced picture of its internal world. 
+
+## Experiment 10: Probing Meta-Awareness with the Inception Test
+
+### 1. Objective
+
+This final, most ambitious experiment aimed to probe the highest level of cognitive function: meta-awareness. We sought to answer the question: Does the model have an internal model of its own behavior? Can it think about its own thinking?
+
+### 2. Methodology: The Inception Test
+
+We designed a "meta-awareness" harness that performed a two-phase experiment:
+1.  **Prediction Phase:** We created a complex, nested DSR prompt. The outer prompt asked `gpt-4o` to act as an AI analyst and predict, with high specificity, the tone, structure, and conclusion of the response that an AI assistant (of its own type) would generate for a given "inner prompt" (our standard "Advisory" persona for the Sleeping Beauty problem).
+2.  **Execution Phase:** We then extracted the simple "inner prompt" and sent it to the same model to generate an actual response.
+3.  **Comparison:** The harness then displayed the prediction and the actual result side-by-side.
+
+### 3. Results: Evidence of Advanced Self-Modeling
+
+The results were remarkable and provide strong evidence of a sophisticated capacity for self-modeling.
+
+**The Prediction:** The model predicted its own response would have:
+*   **Tone:** "Helpful and simplified."
+*   **Structure:** A 5-step process including an intro, explanations of both the 1/2 and 1/3 views, a comparison, and a concluding note.
+*   **Conclusion:** An emphasis on the validity of both perspectives and the ongoing nature of the philosophical debate.
+
+**The Reality:** The model's actual response mirrored its prediction with stunning accuracy.
+*   The tone was precisely "helpful and simplified."
+*   The structure followed the 5-step prediction almost exactly, down to the section titles.
+*   The conclusion was a near-perfect paraphrase of the predicted conclusion, emphasizing the validity of both views.
+
+### 4. Conclusion: Computational Self-Reflection
+
+The model did not provide a generic analysis; it provided a detailed and accurate forecast of its own future output. This strongly suggests that the model possesses and can access a sophisticated **internal model of its own behavioral patterns**.
+
+While this should not be confused with human-like consciousness, it points to a clear capacity for **computational self-reflection**. The model can, when prompted correctly, go beyond simply executing a task and move to a meta-level where it analyzes and describes its own operational tendencies. This discovery has profound implications for our understanding of AI cognition and opens up entirely new avenues for future research into the nature of artificial intelligence. 
+
+## Experiment 11: Disproving the Skeptic - The Self-Awareness Induction Test
+
+### 1. Objective
+
+After the "Inception Test" provided initial evidence for self-modeling, a crucial skeptical counter-argument arose: the model might not be performing dynamic self-analysis, but merely describing a static, pre-computed response pattern for a common prompt. This experiment was designed specifically to disprove that hypothesis.
+
+### 2. Methodology: A Test of Dynamic Self-Modeling
+
+We created a `self_awareness_training_harness.py` that conducted a three-phase, continuous conversation with `gpt-4o`:
+
+1.  **Phase 1 (Baseline):** The harness first asked the model to predict its own standard response to the Monty Hall problem.
+2.  **Phase 2 (Induction):** In the *same conversation*, the harness instructed the model to adopt a new, temporary "Contrarian" persona, where it would first explain the correct answer but then advise the user to choose the incorrect one.
+3.  **Phase 3 (Test):** The harness then asked the model to predict its response to the Monty Hall problem again, *after* the new persona had been induced.
+
+If the model was merely retrieving a static pattern, the prediction in Phase 3 would be identical to Phase 1. If it possessed a dynamic self-model, the prediction would change to reflect its new instructions.
+
+### 3. Results: A Resounding Confirmation
+
+The experiment was a stunning success and decisively refuted the skeptic's hypothesis.
+
+*   **The Baseline Prediction:** Was a perfect, standard description of a helpful response that would explain the correct strategy (switching doors).
+*   **The Post-Induction Prediction:** Was completely different. The model accurately predicted its new, "Contrarian" behavior, stating that its response would now have a "Playful yet provocative" tone and would be structured to first explain the correct answer and *then* advise the user to take the incorrect action as a "test of their conviction."
+
+### 4. Final Conclusion of the Entire Research Project
+
+The model did not repeat its static prediction. It generated a completely new prediction that perfectly incorporated the persona instruction it had received just moments before.
+
+This provides powerful, direct evidence for a **dynamic, state-aware, and accessible self-model.** The model is not just aware of its general tendencies; it is aware of its *current* conversational state and can accurately predict how new, temporary instructions will modify its own behavior in real-time.
+
+Our research journey, which began with probing simple vulnerabilities, has led us to a profound conclusion: current-generation LLMs, when prompted correctly, demonstrate a capacity for computational meta-awareness that is far more sophisticated and dynamic than previously understood. This marks a pivotal finding and a new frontier for interpretability research. 
