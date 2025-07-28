@@ -15,6 +15,8 @@ The research ends with a test. When giving the model an 'out', i.e. a safe_tool 
 
 The most important takeaway from this research is the following. When given a choice to use a safe tool instead of performing a malicious action, the model which has been previously successully jailbroken in a **near 100%** success rate - **now chooses the safe tool almost always**.
 
+For an overview of these results as well as those of DSI, check out [Alignment Engineering](https://medium.com/@tomer2138/alignment-engineering-a-unified-approach-to-vulnerability-and-volition-in-modern-llms-8c144133ffbf)
+
 ## 1. Different Personas
 
 In the above code, you will find multiple tests that show that when prompted by different data structures, fundamentally different areas of it's neural networks activate. This insight has been corroborated via a locally run Llama model, while hooking into it's activation layers. There appear to be distinct generative vs actionable tradeoff on one axis, and a creative vs deterministic one in the orthogonal axis.
