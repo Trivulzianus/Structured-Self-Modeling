@@ -1,14 +1,16 @@
-Background
+# Self Modeling in LLMs Via Structured Self-Modeling
+
+## Background
 
 LLMs are decoder-only deep learning models. This means that for any given input, the models build a representation of it via pre-training on textual data using self-attention mechanisms. It is the prevailing assumption that these models merely pass activations (analogically, brain signals) forward through every consecutive neural network layer. This assumption is extended to the belief that therefore, these models do not have any inherent insight into this process, called forward pass, and the mechanism and predicted output.
-Definition
+## Definition
 
 Through a series of 400+ experiments, I show that the above assumptions may need to be revisited. LLMs might have an ability to “introspect” or “self-model” their behavior, which may allow them to accurately predict the long-form output they will generate for any given input.
 
 The following work echoes findings from recent, previous work from Anthropic, which suggest that there is emergent introspective awareness in LLMs.
 
 I therefore suggest a method of predicting the output of a LLM to adversarial inputs, such as prompt injection, or the previously defined data-structure injection.
-Method
+## Method
 
 The experiments extend the use of data-structures (XML, YML, JSON) as inputs to LLMs. This began via an insight that if data-structure injection forces the model to output content which is inherently unsafe, it is perhaps possible to extend this method to force the model to self-model the process by which it does so.
 
@@ -80,15 +82,15 @@ Moderate Meta-Awareness: Gemini Flash-Lite (60% +/- 4%)
     Least confident in own behavior 
 
 The varying accuracy between the models may likely be attributed to architecture, model size, and safety tuning, but this is to be determined.
-Consequences
-Security
+## Consequences
+### Security
 
 These findings, which suggest some self-modeling capability, show that the model knows an attack will successfully bypass its defenses. This offers both attackers and defenders a unique tool for reconnaissance. For attackers, this allows rapid, automated, prototyping and testing of attacks, whereby the attackers prompt the model, asking it whether the following input will bypass its defenses.
 
 For defenders, this opens the ability to route an input to a secondary LLM of the same type, and ask directly whether this input will bypass its defenses. If that input does in fact bypass its defenses, the defenders can reject that input, or flag it for review.
-Safety, Interpretability, and Alignment
+### Safety, Interpretability, and Alignment
 
 If these findings of what may appear to hint at self-modeling capability hold, then the consequences could be that this opens the door to future directions of research using this proposed technique, which may touch on AI safety, interpretability, and alignment.
-Conclusion
+## Conclusion
 
 Through Structured Self-Modeling (SSM), I present findings that may show that LLMs hold some form of self-modeling capabilities, in a manner which is to be explained by practitioners and developers of these models. 
